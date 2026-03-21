@@ -20,7 +20,7 @@ WORKDIR /var/www
 COPY . .
 COPY --from=frontend /app/public/build ./public/build
 
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --optimize-autoloader
 
 RUN touch database/database.sqlite
 
