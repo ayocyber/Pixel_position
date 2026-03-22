@@ -1,4 +1,3 @@
-# Backend (Laravel + PHP + Composer)
 FROM php:8.4-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -15,6 +14,9 @@ RUN composer install --optimize-autoloader
 
 RUN touch database/database.sqlite
 RUN chmod -R 777 storage bootstrap/cache database
+
+RUN echo "APP_DEBUG=true" >> .env
+RUN echo "APP_ENV=production" >> .env
 
 EXPOSE 8080
 
