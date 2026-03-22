@@ -5,6 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+RUN ls -la public/build
 
 # Stage 2 - Backend (Laravel + PHP + Composer)
 FROM php:8.4-fpm
