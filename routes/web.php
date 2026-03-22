@@ -23,7 +23,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionController::class, 'store']);
 });
 
-
+Route::get('/debug', function () {
+    return [
+        'php' => phpversion(),
+        'storage_writable' => is_writable(storage_path()),
+        'database_exists' => file_exists(database_path('database.sqlite')),
+        'env' => app()->environment(),
+        'key' => config('app.key') ? 'set' : 'missing',
+    ];
+});
 // Route::get('/register', [RegisteredUserController::class, 'create']);
 // Route::post('/register', [RegisteredUserController::class, 'store']);
 
