@@ -1,13 +1,4 @@
-# Stage 1 - Build Frontend (Vite)
-FROM node:20 AS frontend
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-RUN ls -la public/build
-
-# Stage 2 - Backend (Laravel + PHP + Composer)
+# Backend (Laravel + PHP + Composer)
 FROM php:8.4-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -19,7 +10,6 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 COPY . .
-COPY --from=frontend /app/public/build ./public/build
 
 RUN composer install --optimize-autoloader
 
