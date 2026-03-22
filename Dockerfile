@@ -17,6 +17,7 @@ RUN chmod -R 777 storage bootstrap/cache database
 
 RUN echo "APP_DEBUG=true" >> .env
 RUN echo "APP_ENV=production" >> .env
+RUN echo "APP_KEY=base64:6c9vWoP7gj+CqQ7llWIB/Ow/1jWflzj6Nf4sW/9MeSk=" >> .env
 
 EXPOSE 8080
 
