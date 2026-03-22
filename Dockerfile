@@ -14,13 +14,11 @@ COPY . .
 RUN composer install --optimize-autoloader
 
 RUN touch database/database.sqlite
-
-RUN php artisan migrate --force
-RUN php artisan db:seed --force
-RUN php artisan storage:link
-
-RUN chmod -R 777 storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache database
 
 EXPOSE 8080
 
-CMD ["php", "-d", "display_errors=1", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+CMD php artisan migrate --force && \
+    php artisan db:seed --force && \
+    php artisan storage:link && \
+    php -d display_errors=1 artisan serve --host=0.0.0.0 --port=8080
